@@ -8,7 +8,7 @@ const searchBtn = document.getElementById('search-btn');
 
 async function fetchWeatherDataByCity(cityName) {
     try {
-        const response = await fetch(`/weather?city=${cityName}`);
+        const response = await fetch(`http://localhost:3000/weather?city=${cityName}`);
         if (!response.ok) {
             throw new Error(`Błąd API: ${response.status} - ${response.statusText}`);
         }

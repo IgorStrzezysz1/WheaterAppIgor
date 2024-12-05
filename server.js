@@ -2,29 +2,37 @@ import express from 'express';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
 
-dotenv.config();  // Załaduj zmienne środowiskowe z pliku .env
+dotenv.config();
 
 const app = express();
-const apiKey = process.env.API_KEY;  // Pobierz klucz API
+const PORT = 3000;
 
+app.use(express.static('public')); // Obsługa plików statycznych (np. HTML, CSS)
+
+// Endpoint do pobierania danych pogodowych
 app.get('/weather', async (req, res) => {
     const city = req.query.city;
+    const apiKey = process.env.API_KEY;
+
     if (!city) {
-        return res.status(400).json({ error: 'Brak nazwy miasta w zapytaniu' });
+        return res.status(400).json({ error: 'Brak nazwy miasta w żądaniu.' });
     }
 
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=pl`;
 
     try {
         const response = await fetch(url);
+        if (!response.ok) {
+            return res.status(response.status).json({ error: response.statusText });
+        }
+
         const data = await response.json();
         res.json(data);
     } catch (error) {
-        console.error('Błąd API:', error);
-        res.status(500).json({ error: 'Nie udało się pobrać danych pogodowych' });
+        res.status(500).json({ error: 'Błąd serwera.' });
     }
 });
 
-app.listen(8080, () => {
-    console.log('Serwer działa na http://localhost:8080');
+app.listen(PORT, () => {
+    console.log(`Serwer działa na porcie ${PORT}`);
 });
