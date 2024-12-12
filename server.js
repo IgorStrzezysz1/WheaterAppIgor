@@ -17,7 +17,6 @@ app.get('/weather', async (req, res) => {//tego nie rozumiem?
     if (!city) {
         return res.status(400).json({ error: 'Brak nazwy miasta w żądaniu.' });//tego nie rozumiem?
     }
-
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=pl`;//tego nie rozumiem?
 
     try {

@@ -4,11 +4,22 @@ const forecastElement = document.getElementById('forecast');
 const weatherIconElement = document.getElementById('weather-icon');
 const apiKey = '83a4e536c6cc9f7b61410fa93df99220'; 
 const locationInput = document.getElementById('location-input');
-const searchBtn = document.getElementById('search-btn');
-// const newbutton = document.getElementById('Newbutton')
-// const clickAlertButton =()=>{
-//         alert("Nowy Button")
-// }
+const checkWheater=document.querySelector('.checkWheater')
+const wheaterDetails = document.querySelector('.wheaterDetails')
+const weatherInfo = document.querySelector('.weatherInfo')
+const searchBar = document.querySelector('.searchBar')
+const searchBtn = document.querySelector('.searchBtn')
+
+
+const renderDetailsPage =()=>{
+    console.log("TEST")
+    checkWheater.style.display='none';
+    weatherInfo.style.display='none';
+    wheaterDetails.style.display='none';
+    searchBtn.style.display='none';
+    searchBar.style.display='none';
+    weatherInfo.style.display='none';
+}
 async function fetchWeatherDataByCity(cityName) { 
     try {
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric&lang=pl`);
@@ -23,11 +34,16 @@ async function fetchWeatherDataByCity(cityName) {
         forecastElement.textContent = data.weather[0].description; // tablica i odwołuje się do 1 elementu tablicy a potem deskricpin
         weatherIconElement.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
         locationInput.value="" //kasowanie imputa
+    
+        wheaterDetails.style.display='block';
+    
     } catch (error) {
         console.error('Błąd podczas pobierania danych pogodowych:', error);
         alert(`Wystąpił błąd podczas pobierania danych pogodowych: ${error.message}`);
     }
 }
+
+wheaterDetails.addEventListener('click', renderDetailsPage)
 
 searchBtn.addEventListener('click', () => {
     const cityName = locationInput.value.trim(); //trim usuwa białe znaki
@@ -47,5 +63,4 @@ locationInput.addEventListener('keydown', (event) => {
     }
 });
 
-// console.log(newbutton)
-// newbutton.addEventListener('click', clickAlertButton);
+//przygotuj to co musisz sobie Diva w html, pola wiatry, opady, + button dodaj do listy i button powortu i żeby to działało
