@@ -13,6 +13,15 @@ display: none;
 .weatherInfo{
   
 }
+.WheaterMoreDetails {
+  display: none; /* Ukryte na początku */
+  background-color: #f0f0f0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
 
 
 body, html {

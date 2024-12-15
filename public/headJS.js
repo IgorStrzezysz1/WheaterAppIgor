@@ -9,7 +9,23 @@ const wheaterDetails = document.querySelector('.wheaterDetails')
 const weatherInfo = document.querySelector('.weatherInfo')
 const searchBar = document.querySelector('.searchBar')
 const searchBtn = document.querySelector('.searchBtn')
+const WheaterMoreDetails=document.querySelector('.WheaterMoreDetails')
+const wheaterDetailsButton = document.querySelector('.wheaterDetails');
+const wheaterMoreDetailsDiv = document.querySelector('.WheaterMoreDetails');
 
+// Funkcja, która pokazuje szczegóły pogody
+const showWeatherDetails = () => {
+    wheaterMoreDetailsDiv.style.display = 'block'; // Ustawia widoczność diva
+    wheaterDetailsButton.style.display = 'none'; // Ukrywa przycisk Szczegóły pogody
+};
+
+wheaterDetailsButton.addEventListener('click', () => {
+    wheaterMoreDetailsDiv.style.display = 'block';
+    wheaterDetailsButton.style.display = 'none';
+});
+
+// Nasłuchiwanie na kliknięcie przycisku
+wheaterDetailsButton.addEventListener('click', showWeatherDetails);
 
 const renderDetailsPage =()=>{
     console.log("TEST")
@@ -62,5 +78,11 @@ locationInput.addEventListener('keydown', (event) => {
         }
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const WheaterMoreDetails = document.querySelector('.WheaterMoreDetails');
+    WheaterMoreDetails.style.display = 'none'; // Ukryj element
+});
+
 
 //przygotuj to co musisz sobie Diva w html, pola wiatry, opady, + button dodaj do listy i button powortu i żeby to działało
